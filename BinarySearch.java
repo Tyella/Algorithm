@@ -89,6 +89,7 @@ public class BinarySearch {
         return start;
     }
     
+    //Pow(x,n)
     public double myPow(double x,int n) {
     	if(x==0) return 0.0;
     	if(n==0) return 1.0;
@@ -98,7 +99,8 @@ public class BinarySearch {
     		return ans;
     	}
     	else if(n<0) {
-    		ans=x*myPowRecursive(x,-(n+1));
+    		//int的取值范围为：-2147483648到2147483647,当-2147483648取反时会导致超出int的取值范围
+    		ans=x*myPowRecursive(x,-(n+1));    //防止超出int的范围
     		return 1.0/ans;
     	}
     	return 0;
@@ -113,4 +115,26 @@ public class BinarySearch {
     	else
     		return res*res;
     }
+    
+    
+    //有效的完全平方数
+    public boolean isPerfectSquare(int num) {
+    	if(num==1 || num==0)
+    		return true;
+    	int low=1;
+    	int high=num;
+    	while(low+1<high) {
+    		int mid=low+(high-low)/2;
+    		if(mid*mid==num)
+    			return true;
+    		//if(mid*mid>num)在有些情况下通不过
+    		if(mid>num/mid)
+    			high=mid;
+    		else
+    			low=mid;
+    	}
+    	return false;
+    }
+    
+    
 }
