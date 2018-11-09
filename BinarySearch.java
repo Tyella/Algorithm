@@ -1,4 +1,8 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class BinarySearch {
 	//寻找峰值
@@ -22,22 +26,30 @@ public class BinarySearch {
 	
 	//寻找旋转排序数组中的最小值
 	public int findMin(int[] nums) {
-		if(nums.length==1)
-			return nums[0];
-		int low=0;
-		int high=nums.length-1;
+		int low=0,high=nums.length-1;
 		while(low<high) {
 			int mid=low+(high-low)/2;
-			if(nums[low]<nums[mid] && nums[mid]<nums[high])
-				return nums[low];
-			if(low==mid && (high-low)==1)
-				return  nums[high]>nums[low]?nums[low]:nums[high];
-			if(nums[low]<nums[mid])
-				low=mid;
+			if(nums[mid]>nums[high])
+				low=mid+1;
 			else
 				high=mid;
 		}
-		return -1;
+		return nums[low];
+	}
+	
+	//寻找旋转排序数组中的最小值 II
+	public int findMinII(int[] nums) {
+		int low=0,high=nums.length-1;
+		while(low<high) {
+			int mid=low+(high-low)/2;
+			if(nums[mid]<nums[high])
+				high=mid;
+			else if(nums[mid]>nums[high])
+				low=mid+1;
+			else
+				high--;
+		}
+		return nums[low];
 	}
 	
 	//在排序数组中查找元素的第一个和最后一个位置
@@ -134,6 +146,51 @@ public class BinarySearch {
     			low=mid;
     	}
     	return false;
+    }
+    
+    //寻找比目标字母大的最小字母
+    public char nextGreatestLetter(char[] letters,char target) {
+    	int n=letters.length;
+    	int low=0,high=n;
+    	while(low<high) {
+    		int mid=low+(high-low)/2;
+    		if(letters[mid]<=target)
+    			low=mid+1;
+    		else 
+    			high=mid; //mid-1通不过
+    	}
+    	return low<n?letters[low]:letters[0];
+    }
+    
+    public int[] intersection(int[] nums1,int[] nums2) {
+    	int a1=0;
+        int a2=0;
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        List<Integer> list=new ArrayList<Integer>();
+        while (a1<nums1.length&&a2<nums2.length) {
+            if (nums1[a1]==nums2[a2]) {
+                list.add(nums1[a1]);
+                a1++;
+                a2++;
+            }else if (nums1[a1]<nums2[a2]) {
+                a1++;
+            }else {
+                a2++;
+            }
+        }
+        int[] res=new int[list.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i]=list.get(i);
+        }
+        for(int j=0,n=res.length;j<n;j++) {
+        	if(res[j]==res[j+1]) {
+        		
+        	}
+        }
+        	
+        		
+return res;
     }
     
     
