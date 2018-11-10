@@ -162,36 +162,116 @@ public class BinarySearch {
     	return low<n?letters[low]:letters[0];
     }
     
-    public int[] intersection(int[] nums1,int[] nums2) {
-    	int a1=0;
-        int a2=0;
-        Arrays.sort(nums1);
-        Arrays.sort(nums2);
-        List<Integer> list=new ArrayList<Integer>();
-        while (a1<nums1.length&&a2<nums2.length) {
-            if (nums1[a1]==nums2[a2]) {
-                list.add(nums1[a1]);
-                a1++;
-                a2++;
-            }else if (nums1[a1]<nums2[a2]) {
-                a1++;
-            }else {
-                a2++;
-            }
-        }
-        int[] res=new int[list.size()];
-        for (int i = 0; i < res.length; i++) {
-            res[i]=list.get(i);
-        }
-        for(int j=0,n=res.length;j<n;j++) {
-        	if(res[j]==res[j+1]) {
-        		
-        	}
-        }
-        	
-        		
-return res;
+    //寻找重复数
+    //首先求出中点mid，然后统计小于等于mid的个数。如果个数大于mid，则在1到mid之间，负责，在mid+1到n之间
+    public int findDuplicate(int[] nums) {
+    	int start=1;
+    	int end=nums.length-1;
+    	while(start<end) {
+    		int mid=start+(end-start)/2;
+    		int counter=0;
+    		for(int a:nums) {
+    			if(a<=mid)
+    				counter++;
+    		}
+    		if(counter>mid)
+    			end=mid;
+    		else
+    			start=mid+1;
+    	}
+    	return start;
     }
+    
+    //两数之和，输入有序数组
+    public int[] twoSum(int[] numbers,int target) {
+    	int left=0;
+    	int right=numbers.length-1;
+    	int[] res=new int[2];
+    	Arrays.fill(res,0);
+    	while(left<right) {
+    		int sum=numbers[left]+numbers[right];
+    		if(target==sum) {
+    			res[0]=left+1;
+    			res[1]=right+1;
+    			return res;
+    		}
+    		else if(target<sum)
+    			right--;
+    		else
+    			left++;
+    	}
+    	return res;
+    }
+    
+    //求两个数组的交集
+    public int[] intersection(int[] nums1,int[] nums2) {
+    	Set<Integer> s1=new HashSet<Integer>();
+    	Set<Integer> s2=new HashSet<Integer>();
+    	Set<Integer> tmp=new HashSet<Integer>();
+    	for(int i=0;i<nums1.length;i++)
+    		s1.add(nums1[i]);
+    	for(int j=0;j<nums2.length;j++)
+    		s2.add(nums2[j]);
+    	for(Integer integer:s1) {
+    		if(s2.contains(integer))
+    			tmp.add(integer);
+    	}
+    	int a=0;
+    	int[] res=new int[tmp.size()];
+    	for(Integer p:tmp)
+    		res[a++]=p;
+    	return res;
+    }
+    
+    //两个数组的交集II
+    public int[] intersect(int[] nums1,int[] nums2) {
+    	int a1=0;
+    	int a2=0;
+    	Arrays.sort(nums1);
+    	Arrays.sort(nums2);
+    	List<Integer> list=new ArrayList<Integer>();
+    	while(a1<nums1.length && a2<nums2.length) {
+    		if(nums1[a1]==nums2[a2]) {
+    			list.add(nums1[a1]);
+    			a1++;
+    			a2++;
+    		}
+    		else if(nums1[a1]<nums2[a2])
+    			a1++;
+    		else
+    			a2++;
+    	}
+    	int[] res=new int[list.size()];
+    	int p=0;
+    	for(Integer integer:list)
+    		res[p++]=integer;
+    	return res;
+    }
+    
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+ 	   int p=0,left=0,right=0;
+int ll=nums1.length;
+int lr=nums2.length;
+int[] sum=new int[ll+lr];
+while(left<ll && right<lr) {
+	   if(nums1[left]<nums2[right])
+		   sum[p++]=nums1[left++];
+	   else
+		   sum[p++]=nums2[right++];
+}
+while(left<ll) {
+	   sum[p++]=nums1[left++];
+}
+while(right<lr) {
+	   sum[p++]=nums2[right++];
+}
+if((ll+lr)%2!=0) {
+	   return sum[(ll+lr)/2];
+}
+else {
+	   return (sum[(ll+lr)/2]+sum[(ll+lr)/2-1])/2.0;
+}
+}
     
     
 }
