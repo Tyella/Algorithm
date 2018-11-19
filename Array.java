@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.LinkedList;
 
 public class Array {
 	//求数组的中间索引
@@ -77,4 +79,37 @@ public class Array {
 		}
 		return max>=2*secmax?index:-1;
     }
+	
+	//螺旋矩阵
+	public List<Integer> spiralOrder(int[][] matrix){
+		if(matrix.length==0)
+			return null;
+		List<Integer> list=new LinkedList();
+		int m=matrix.length;                   //矩阵有m行
+		int n=matrix[0].length;                //矩阵有n列
+		int total=m*n;                         //矩阵中的总元素
+		int sum=1;                             //计数器
+		int rowBegin=0;
+		int rowEnd=m-1;
+		int columnBegin=0;
+		int columnEnd=n-1;
+		while(sum<total) {
+			for(int i=columnBegin;i<=columnEnd;i++,sum++)
+				list.add(matrix[rowBegin][i]);
+			rowBegin++;
+			
+			for(int i=rowBegin;i<=rowEnd;i++,sum++)
+				list.add(matrix[i][columnEnd]);
+			columnEnd--;
+			
+			for(int i=columnEnd;i>=columnBegin;i--,sum++)
+				list.add(matrix[rowEnd][i]);
+			rowEnd--;
+			
+			for(int i=rowEnd;i>=rowBegin;i--,sum++)
+				list.add(matrix[i][columnBegin]);
+			columnBegin++;
+		}
+		return list;
+	}
 }
