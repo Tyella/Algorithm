@@ -84,7 +84,7 @@ public class Array {
 	public List<Integer> spiralOrder(int[][] matrix){
 		if(matrix.length==0)
 			return null;
-		List<Integer> list=new LinkedList();
+		List<Integer> list=new LinkedList<Integer>();
 		int m=matrix.length;                   //矩阵有m行
 		int n=matrix[0].length;                //矩阵有n列
 		int total=m*n;                         //矩阵中的总元素
@@ -111,5 +111,23 @@ public class Array {
 			columnBegin++;
 		}
 		return list;
+	}
+	
+	//杨辉三角
+	public List<List<Integer>> generate(int numRows){
+		List<List<Integer>> res=new LinkedList<List<Integer>>();
+		if(numRows<=0)
+			return res;
+		for(int i=0;i<numRows;i++) {
+			List<Integer> list=new LinkedList<>();
+			for(int j=0;j<=i;j++) {
+				if(j==0 || j==i)
+					list.add(1);
+				else                   //trangle[i][j]=trangle[i-1][j]+trangle[i-1][j-1];
+					list.add(res.get(i-1).get(j)+res.get(i-1).get(j-1));    
+			}
+			res.add(list);
+		}
+		return res;
 	}
 }
