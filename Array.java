@@ -130,4 +130,20 @@ public class Array {
 		}
 		return res;
 	}
+	
+	//leetcode 14
+	//最长公共前缀
+	public String longestCommonPrefix(String[] strs) {
+		if(strs==null)
+			return "";
+		String prefix=strs[0];                              //假设数组中的第一个字符串为最长公共前缀
+		for(int i=1;i<strs.length;i++) {
+			while(strs[i].indexOf(prefix)!=0) {               //前缀不匹配，继续循环
+				prefix=prefix.substring(0, prefix.length()-1);
+				if(prefix.length()==0)
+					return "";
+			}
+		}
+		return prefix;
+	}
 }
