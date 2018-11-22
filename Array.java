@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Array {
@@ -145,5 +146,29 @@ public class Array {
 			}
 		}
 		return prefix;
+	}
+	
+	//数组拆分I
+	public int arrayPairSum(int[] nums) {
+		if(nums.length==1)
+			return nums[0];
+		Arrays.sort(nums);
+		int sum=0;
+			for(int i=0;i<nums.length;i+=2)
+				sum+=nums[i];
+		return sum;
+	}
+	
+	//最大连续1的个数
+	public int findMaxConsecutiveOnes(int[] nums) {
+		int max=0,number=0;
+		for(int i:nums) {
+			if(i==1)
+				number++;
+			else
+				number=0;
+			max=Math.max(max, number);
+		}
+		return max;
 	}
 }
