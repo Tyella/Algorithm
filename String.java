@@ -46,3 +46,15 @@ public class String {
 		}
 		return high;
 }
+	
+	public int maxArea(int[] height) {
+        int max=0,tmp=0;
+       int x=0;
+       for(int i=0;i<height.length-1;i++)
+    	   for(int j=i+1;j<height.length;j++) {
+    		   x=(height[i]>height[j])?height[j]:height[i];
+    		   tmp=x*(j-i);
+    		   max=tmp>max?tmp:max;
+    	   }
+       return max;
+    }
