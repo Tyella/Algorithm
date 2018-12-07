@@ -207,5 +207,6 @@ public class Array {
 		return res;
 	}
 
+	//测试contributes不能显示的问题是否解决
 
 }
