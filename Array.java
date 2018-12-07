@@ -171,50 +171,41 @@ public class Array {
 		}
 		return max;
 	}
-	
-	public List<List<Integer>> threeSum(int[] nums) {//求三数之和
-        Arrays.sort(nums);
-        int iNum =Integer.MAX_VALUE ;
-        int jNum;
-        int kNum;
-        List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < nums.length && nums[i] <= 0; i++) {
-            if (iNum == nums[i]) {
-                continue;
-            }
-            iNum = nums[i];
-            int j = i + 1;
-            int k = nums.length - 1;
-            while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
-                if (sum > 0) {
-                    k--;
-                } else if (sum < 0) {
-                    j++;
-                } else {
-                    List<Integer> list = new ArrayList<>();
-                    list.add(nums[i]);
-                    list.add(nums[j]);
-                    list.add(nums[k]);
-                    result.add(list);
 
-                    jNum = nums[j];
-                    do {
-                        j++;
-                        if (j>=k) {
-                            break;
-                        }
-                    } while (jNum == nums[j]);
-                    kNum = nums[k];
-                    do {
-                        k--;
-                        if (j>=k) {
-                            break;
-                        }
-                    } while (kNum == nums[k]);
-                }
-            }
-        }
-        return result;
-    }
+	//求三数之和
+	public List<List<Integer>> threeSum(int[] nums){
+		List<List<Integer>> res=new LinkedList<>();
+		if(nums==null ||nums.length<=2)
+			return res;
+		Arrays.sort(nums);
+		//先找一个负数target，然后找两个正数之和等于0-target
+		//对排序数组用双指针法，从前从后开始遍历，要求满足条件i<j
+		for(int k=0;k<nums.length-2;k++){
+			if(nums[k]>0)
+				break;
+			if(k>0 && nums[k]==nums[k-1])
+				continue;
+			int target=0-nums[k];
+			//双指针，i和j分别表示前后指针
+			int i=k+1,j=nums.length-1;
+			while (i < j) {
+				if(target==nums[i]+nums[j]){
+					res.add(Arrays.asList(nums[k],nums[i],nums[j]));
+					while(i<j && nums[i]==nums[i+1])
+						++i;
+					while(i<j && nums[j]==nums[j-1])
+						--j;
+					++i;--j;
+				}
+				else if(target<nums[i]+nums[j]){
+					--j;
+				}
+				else
+					++i;
+			}
+		}
+		return res;
+	}
+
+
 }
