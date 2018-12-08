@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.LinkedHashMap;
 
 public class firstUniqChar {
-	public int firstUniqChar(String s) {
+	public int firstUniqChar(String s) {k
 		Map<Character,Integer> map=new LinkedHashMap<>();
 		char[] str=s.toCharArray();
 		for(int i=0;i<str.length;i++) {
