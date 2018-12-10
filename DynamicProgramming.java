@@ -25,6 +25,45 @@ public class DynamicProgramming {
         }
         return max * max;
     }
-    
+
+
+    //由于当前最小路径和只由上一层相邻的两个数确定，若a[i][j]的值表示为a[0][0]到a[i][j]的最小路径和。那么它可表示为：
+    //     a[i][j] += min(a[i-1][j],a[i-1][j-1]);
+    //需要处理j=0 and j=i（第一列和最后一列）
+    //
+    //方法二：从下往上
+    //a[i][j] += min(a[i+1][j],a[i+1][j+1]);
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        if (n == 0) {
+            return 0;
+        }
+        int dp[] = new int[n];
+
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = 0; j <= i; j++) {
+                if (i == n - 1) {
+                    dp[j] = triangle.get(i).get(j); //dp[j]用于表示最小路径和
+                } else {
+                    //找到两个最小的值，将他们相加并赋值
+                    dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
+                }
+            }
+        }
+        return dp[0];
+    }
+
+
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int[] dp = new int[triangle.size() + 1];
+        for (int i = triangle.size() - 1; i >= 0; i--) {
+            List<Integer> list = triangle.get(i);
+            for (int j = 0; j < list.size(); j++) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + list.get(j);
+            }
+        }
+        return dp[0];
+    }
+
 
 }
