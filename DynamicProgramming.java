@@ -65,5 +65,21 @@ public class DynamicProgramming {
         return dp[0];
     }
 
+    //最大子序和
+    //步骤一:令dp[i]表示以第i个元素（A[i-1]）为结尾的连续序列的最大子序和
+    //步骤二：作如下考虑，因为dp[i]要求以A[i]-1结尾，有两种情况：
+    //1.最大连续子序和的连续子序只有一个元素,就是A[i-1]
+    //2.最大连续子序和的连续子序多于一个元素,则dp[i]=dp[i-1]+A[i-1]
+    //dp[i]=max(dp[i-1]+A[i-1],A[i-1])
+    public int maxSubArray(int[] nums) {
+        int res = Integer.MIN_VALUE, n = nums.length;
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        for (int i = 1; i <= n; i++) {
+            dp[i] = dp[i - 1] > 0 ? dp[i - 1] + nums[i - 1] : nums[i - 1];
+            res = Math.max(dp[i], res);
+        }
+        return res;
+    }
 
 }
