@@ -1,6 +1,4 @@
-import java.util.List;
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Array {
 	//求数组的中间索引
@@ -207,6 +205,45 @@ public class Array {
 		return res;
 	}
 
-	//测试contributes不能显示的问题是否解决
+	class Interval {
+		private int start;
+		private int end;
+
+		public Interval() {
+			start = 0;
+			end = 0;
+		}
+
+		public Interval(int i, int j) {
+			start = i;
+			end = j;
+		}
+	}
+	public List<Interval> merge(List<Interval> intervals){
+		List<Interval> res=new ArrayList<>();
+		if(intervals.size()==0)
+			return res;
+		Collections.sort(intervals,new Comparator<Interval>(){
+			public int compare(Interval a,Interval b){
+				return a.start-b.start;
+			}
+		});
+		Interval temp=intervals.get(0);
+		if(intervals.size()==1){
+			res.add(temp);
+			return res;
+		}
+		for(int i=1;i<intervals.size();i++){
+			if(temp.end>=intervals.get(i).start){
+				temp.end=Math.max(temp.end,intervals.get(i).end);
+			}
+			else{
+				res.add(temp);
+				temp=intervals.get(i);
+			}
+		}
+		res.add(temp);
+		return res;
+	}
 
 }
