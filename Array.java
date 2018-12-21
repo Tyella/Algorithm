@@ -219,31 +219,42 @@ public class Array {
 			end = j;
 		}
 	}
+
+	//合并区间
+	/*
+	首先对List进行根据start进行排序
+	如果如果第一个数组尾小于第二个数组头，则添加；
+	否则，合并两个数组
+	 */
 	public List<Interval> merge(List<Interval> intervals){
-		List<Interval> res=new ArrayList<>();
-		if(intervals.size()==0)
-			return res;
-		Collections.sort(intervals,new Comparator<Interval>(){
-			public int compare(Interval a,Interval b){
-				return a.start-b.start;
+		if(intervals==null || intervals.size()<=1)
+			return intervals;
+		List<Interval> result=new ArrayList<>();
+		Collections.sort(intervals, new Comparator<Interval>() {
+			@Override
+			public int compare(Interval o1, Interval o2) {
+				return o1.start-o2.start;
 			}
 		});
-		Interval temp=intervals.get(0);
-		if(intervals.size()==1){
-			res.add(temp);
-			return res;
-		}
-		for(int i=1;i<intervals.size();i++){
-			if(temp.end>=intervals.get(i).start){
-				temp.end=Math.max(temp.end,intervals.get(i).end);
+		Interval prev=null;
+		for(Interval item:intervals){
+			if(prev==null || prev.end<item.start){
+				result.add(item);
+				prev=item;
 			}
-			else{
-				res.add(temp);
-				temp=intervals.get(i);
+			else if(prev.end<item.end){
+				prev.end=item.end;
 			}
 		}
-		res.add(temp);
-		return res;
+		return result;
 	}
+
+	
+
+
+
+
+
+
 
 }
