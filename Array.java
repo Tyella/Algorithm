@@ -268,7 +268,31 @@ public class Array {
 		return max;
 	}
 
-	
+	//最长连续序列
+	/*
+	将数组中所有元素存储到set中，然后选一个元素开始左右遍历。
+	如果左右两边的元素都在set中，则--prev,++next;
+	next-prev-1就是最长连续序列
+	 */
+	public int longestConsecutive(int[] nums){
+		int res=0;
+		Set<Integer> set=new HashSet<>();
+		for(int num:nums)
+			set.add(num);
+		for(int num:nums){
+			if(set.remove(num)){
+				int prev=num-1;
+				int next=num+1;
+				while(set.remove(prev))
+					--prev;
+				while(set.remove(next))
+					++next;
+				res=Math.max(res,next-prev-1);
+			}
+		}
+		return res;
+	}
+
 
 
 
