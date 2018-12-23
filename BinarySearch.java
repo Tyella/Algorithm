@@ -2,7 +2,7 @@ package Algorithm;
 
 //二叉查找数及其变种
 public class BinarySearch {
-	
+
 	//1.查找第一个值等于给定值的元素
 	public int binarySearch1(int[] a,int n,int value){
 		int low=0;

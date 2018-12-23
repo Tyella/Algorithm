@@ -1,4 +1,6 @@
-package com.example.demo.dao;
+package Algorithm;
+
+import java.util.List;
 
 public class DynamicProgramming {
 
@@ -54,7 +56,7 @@ public class DynamicProgramming {
     }
 
 
-    public int minimumTotal(List<List<Integer>> triangle) {
+    public int minimumTotal1(List<List<Integer>> triangle) {
         int[] dp = new int[triangle.size() + 1];
         for (int i = triangle.size() - 1; i >= 0; i--) {
             List<Integer> list = triangle.get(i);
