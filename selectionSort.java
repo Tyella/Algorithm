@@ -1,6 +1,6 @@
 package Algorithm;
 
-//插入排序
+//选择排序
 //把数组分为已排序和未排序区间，每次从未排序区间中取出最小值，放到已排序区间末尾
 public class selectionSort {
     public void selectionSort(int[] a,int n){

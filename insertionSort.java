@@ -1,11 +1,12 @@
 package Algorithm;
 
-//插入排序
-/*
-把要排序的数组分成两个区间，已排序区间和未排序区间
-从未排序区间中取出元素插入到已i排序区间的合理位置
- */
+
 public class insertionSort {
+    /*
+    插入排序
+    把要排序的数组分成两个区间，已排序区间和未排序区间
+    从未排序区间中取出元素插入到已i排序区间的合理位置
+     */
     public void insertionSort(int[] a,int n){
         if(n<=1)
             return;
@@ -21,7 +22,7 @@ public class insertionSort {
                     break;
                 }
             }
-            a[j+1]=value;
+            a[j+1]=value;    //--j,边界条件j为-1时才停
         }
     }
 }
