@@ -1,18 +1,12 @@
-package com.example.demo.dao;
+package Algorithm;
 
- class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
-  }
-public class List {
-    //test leetcode
-    public ListNode reverseList(ListNode head) {
+public class ReverseList {
+    public ListNode reverseList(ListNode head){
         if(head==null || head.next==null)
             return head;
         ListNode pcur=head;
         ListNode prev=null;
-        while(pcur!=null) {
+        while(pcur!=null){
             ListNode ptmp=pcur;
             pcur=pcur.next;
             ptmp.next=prev;
