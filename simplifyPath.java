@@ -13,6 +13,6 @@ public class simplifyPath {
             else if(!str.equals(".") && !str.equals("") && !str.equals(".."))
                 stack.push(str);
         }
-        return "/"+String.join("/",stack);  //JDK8新增的join()方法
+        return "/"+String.join("/",stack);  //JDK8新增的join()方法,
     }
 }
